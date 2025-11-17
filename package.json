@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend for Telegram submission",
-  "main": "app.js",
+  "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
