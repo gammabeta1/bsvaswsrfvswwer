@@ -12,6 +12,19 @@ var app = express();
 var PORT = process.env.PORT || 8080;
 
 
+// -------------------- 5. Rate limiter --------------------
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    standardHeaders: true, // return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // disable `X-RateLimit-*` headers
+    handler: (req, res) => {
+        blockIP(req.ip); // also increment blocklist strikes
+        res.status(429).send("Too many requests, try again later.");
+    },
+});
+
+app.use(limiter);
 
 
 // -------------------- 1. Security headers --------------------
@@ -42,9 +55,11 @@ app.use((req, res, next) => {
         blockedIPs.delete(ip); // unblock expired
     }
 
-    if (entry && entry.blockedUntil > Date.now()) {
-        return res.status(403).send("Access temporarily blocked due to suspicious activity.");
-    }
+  if (entry && entry.blockedUntil > Date.now()) {
+    console.log(`Rejected IP ${ip} (still blocked)`);
+    return res.status(403).send("Access temporarily blocked due to suspicious activity.");
+}
+
 
     var ua = req.headers["user-agent"] || "";
     var botPatterns = [/bot/i, /crawler/i, /spider/i, /curl/i, /wget/i, /python/i, /java/i];
