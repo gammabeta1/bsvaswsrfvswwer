@@ -1,18 +1,16 @@
-# Use official Node.js LTS image as base
 FROM node:20-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies first (better caching)
+# Copy only package files first
 COPY package*.json ./
-RUN npm install --production
 
-# Copy the rest of the application code
+# Install dependencies with minimal disk usage
+RUN npm ci --omit=dev && npm cache clean --force
+
+# Copy the rest of the code
 COPY . .
 
-# Expose the port your app uses
 EXPOSE 3000
 
-# Command to run the app
 CMD ["node", "index.js"]
