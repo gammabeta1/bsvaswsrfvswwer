@@ -2,13 +2,17 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# Copy only the lockfile + package.json first (best practice)
 COPY package*.json ./
 
-# Remove possibly corrupted lockfile and reinstall cleanly
-RUN rm -f package-lock.json && \
-    npm install --omit=dev && \
-    npm cache clean --force
+# Use npm ci → reproducible, fast, and uses almost no extra disk because it reuses cache layers
+RUN npm ci --omit=dev
 
+# Optional but recommended: clean the cache is huge and useless in production image
+RUN npm cache clean --force
+
+# Now copy the rest of the code
 COPY . .
 
-# your CMD/ENTRYPOINT
+# Your start command
+CMD ["node", "server.js"]   # or "npm start", etc.
